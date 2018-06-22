@@ -73,6 +73,7 @@ __kernel void lyra441p1(__global uint* hashes, __global uint* lyraStates)
     state[2] = state[0];
     state[3] = state[1];
     // state2
+    // https://github.com/lenis0012/sgminer-gm/blob/master/kernel/lyra2rev2.cl#L298
     state[4] = (ulong2)(0x6a09e667f3bcc908UL, 0xbb67ae8584caa73bUL);
     state[5] = (ulong2)(0x3c6ef372fe94f82bUL, 0xa54ff53a5f1d36f1UL);
     // state3 (low,high,..
@@ -82,6 +83,7 @@ __kernel void lyra441p1(__global uint* hashes, __global uint* lyraStates)
     // Absorbing salt, password and basil: this is the only place in which the block length is hard-coded to 512 bits
     for (int i = 0; i < 12; ++i)
     {
+        // https://github.com/lenis0012/sgminer-gm/blob/master/algorithm/lyra2.c#L138
         roundLyra(state);
     }
     

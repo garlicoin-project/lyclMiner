@@ -75,6 +75,7 @@ __kernel void lyra441p3(__global uint* hashes, __global uint* lyraStates)
     state[7] = lyraState->hl4[7];
 
     // 2. rounds
+    //https://github.com/lenis0012/sgminer-gm/blob/master/kernel/lyra2rev2.cl#L340
     for (int i = 0; i < 12; ++i)
     {
         roundLyra(state);

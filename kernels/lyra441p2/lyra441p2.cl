@@ -391,6 +391,7 @@ __kernel void lyra441p2(__global uint* lyraStates)
     ulong state1[12];
     
     // loop 1
+    //https://github.com/lenis0012/sgminer-gm/blob/master/kernel/lyra2rev2.cl#L310
     {
         state0[ 9] = state[0];
         state0[10] = state[1];
@@ -417,6 +418,7 @@ __kernel void lyra441p2(__global uint* lyraStates)
         roundLyra_sm(state);
     }
     // loop 2
+    //https://github.com/lenis0012/sgminer-gm/blob/master/kernel/lyra2v2.cl#L82
     {
         state[0] ^= state0[0];
         state[1] ^= state0[1];
@@ -458,7 +460,8 @@ __kernel void lyra441p2(__global uint* lyraStates)
     // 12,13,14 : 15,16,17 : 18,19,20 : 21,22,23
     // 24,25,26 : 27,28,29 : 30,31,32 : 33,34,35
     // 36,37,38 : 39,40,41 : 42,43,44 : 45,46,47
-    
+    // https://github.com/lenis0012/sgminer-gm/blob/master/kernel/lyra2rev2.cl#L321
+    // https://github.com/lenis0012/sgminer-gm/blob/master/kernel/lyra2v2.cl#L150
     ulong state2[3];
     ulong t0,c0;
     loop3p1_iteration(0, 1, 2, 33,34,35);
@@ -502,6 +505,7 @@ __kernel void lyra441p2(__global uint* lyraStates)
 
     //------------------------------------
     // Wandering phase part2 (last iteration)
+    // https://github.com/lenis0012/sgminer-gm/blob/master/kernel/lyra2rev2.cl#L327
     smState[lIdx].s0 = state[0];
     barrier(CLK_LOCAL_MEM_FENCE);
     rowa = (uint)smState[gr4].s0 & 3;
@@ -573,6 +577,7 @@ __kernel void lyra441p2(__global uint* lyraStates)
     wanderIterationP2(30,31,32, 6, 7, 8, 18,19,20, 30,31,32, 42,43,44);
     wanderIterationP2(33,34,35, 9,10,11, 21,22,23, 33,34,35, 45,46,47);
 
+    //https://github.com/lenis0012/sgminer-gm/blob/master/kernel/lyra2rev2.cl#L337
     state[0] ^= last[0];
     state[1] ^= last[1];
     state[2] ^= last[2];
